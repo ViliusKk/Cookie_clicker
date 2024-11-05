@@ -5,6 +5,10 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    int clicks;
+    public TMP_Text clicksText;
+
+
     public TMP_Text employeeCountText;
     int employeeCount;
 
@@ -12,5 +16,11 @@ public class GameManager : MonoBehaviour
     {
         employeeCount++;
         employeeCountText.text = employeeCount.ToString();
+    }
+
+    public void AddClick()
+    {
+        clicks++;
+        clicksText.text = clicks.ToString();
     }
 }
