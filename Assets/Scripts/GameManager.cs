@@ -5,17 +5,26 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    int clicks;
     public TMP_Text clicksText;
-
-
     public TMP_Text employeeCountText;
+    public TMP_Text employeePriceText;
     int employeeCount;
+    int clicks;
+    int employeePrice = 100;
 
     public void BuyEmployee()
     {
-        employeeCount++;
-        employeeCountText.text = employeeCount.ToString();
+        if (clicks >= employeePrice)
+        {
+            employeeCount++;
+            employeeCountText.text = employeeCount.ToString();
+
+            clicks -= employeePrice;
+            clicksText.text = clicks.ToString();
+
+            employeePrice += employeePrice / 10;
+            employeePriceText.text = $"Price: {employeePrice}";
+        }
     }
 
     public void AddClick()

@@ -656,6 +656,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   clicksText: {fileID: 232943806}
   employeeCountText: {fileID: 1457835953}
+  employeePriceText: {fileID: 1218261601}
 --- !u!4 &609682654
 Transform:
   m_ObjectHideFlags: 0
