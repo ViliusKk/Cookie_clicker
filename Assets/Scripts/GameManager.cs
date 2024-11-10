@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -8,12 +9,14 @@ public class GameManager : MonoBehaviour
     public TMP_Text clicksText;
     public TMP_Text employeeCountText;
     public TMP_Text employeePriceText;
+    public TMP_Text cpsText;
     int employeeCount;
     int clicks;
-    int employeePrice = 100;
+    public int employeePrice;
 
     public float clickTimer;
     public float autoSaveTimer;
+    float cps;
 
     void Start()
     {
@@ -22,17 +25,20 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        clicksText.text = clicks.ToString();
-        employeeCountText.text = employeeCount.ToString();
-        employeePriceText.text = employeePrice.ToString();
+        
+        clicksText.text = clicks.ToString("N0");               //       Formatting of 1054.32179:
+        employeeCountText.text = employeeCount.ToString();     //          N:                     1,054.32
+        employeePriceText.text = $"Price: {employeePrice}";    //          N0:                    1,054 
+                                                               //          N1:                    1,054.3
+        clickTimer += Time.deltaTime;                          //          N2:                    1,054.32
+        autoSaveTimer += Time.deltaTime;                       //          N3:                    1,054.322
 
-        clickTimer += Time.deltaTime;
-        autoSaveTimer += Time.deltaTime;
+        UpdateCPS();
 
         if (clickTimer >= 1)
         {
-            AddClick();
             clickTimer = 0;
+            clicks += Convert.ToInt32(cps);
         }
         if (autoSaveTimer >= 10)
         {
@@ -52,7 +58,7 @@ public class GameManager : MonoBehaviour
     {
         clicks = PlayerPrefs.GetInt("clicks");
         employeeCount = PlayerPrefs.GetInt("employee");
-        employeePrice = PlayerPrefs.GetInt("employeePrice");
+        employeePrice = PlayerPrefs.GetInt("employeePrice", employeePrice);
     }
 
     public void BuyEmployee()
@@ -78,5 +84,11 @@ public class GameManager : MonoBehaviour
     void OnApplicationQuit()
     {
         Save();
+    }
+
+    void UpdateCPS() // used to calculate cps from all purchased upgrades
+    {
+        cps = employeeCount;
+        cpsText.text = $"{cps} cps";
     }
 }
