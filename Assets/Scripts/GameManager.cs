@@ -33,11 +33,11 @@ public class GameManager : MonoBehaviour
         clickTimer += Time.deltaTime;                          //          N2:                    1,054.32
         autoSaveTimer += Time.deltaTime;                       //          N3:                    1,054.322
 
-        UpdateCPS();
 
         if (clickTimer >= 1)
         {
             clickTimer = 0;
+            UpdateCPS();
             clicks += Convert.ToInt32(cps);
         }
         if (autoSaveTimer >= 10)
