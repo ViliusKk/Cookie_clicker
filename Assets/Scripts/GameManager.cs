@@ -8,7 +8,7 @@ using UnityEngine.UI;
 public class GameManager : MonoBehaviour
 {
     public int clickPower = 1;
-    float clicks;
+    public float clicks;
     float cps;
 
     public TMP_Text clicksText;
