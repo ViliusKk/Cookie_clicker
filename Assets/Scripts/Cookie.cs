@@ -15,7 +15,7 @@ public class Cookie : MonoBehaviour
 
     void Update()
     {
-        if (manager.clicks > 300)
+        if (manager.clicks > 500)
         {
             GetComponent<SpriteRenderer>().sprite = nextCookieImage;
             if(!skinUnlockParticlesPlayed)
